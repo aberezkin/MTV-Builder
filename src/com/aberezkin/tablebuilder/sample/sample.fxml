@@ -1,0 +1,9 @@
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:controller="com.aberezkin.tablebuilder.sample.Controller"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:id="container"
+      alignment="CENTER"
+      spacing="10">
+
+</VBox>
