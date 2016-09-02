@@ -7,7 +7,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class ModelTableViewBuilder<M> extends TableView<M> {
     /**
@@ -26,8 +28,9 @@ public class ModelTableViewBuilder<M> extends TableView<M> {
             String fieldName = field.getName();
             String getterName = "get" + capitalizeFirst(fieldName);
             String setterName = "set" + capitalizeFirst(fieldName);
+            boolean notAnnotated = field.getAnnotation(IgnoreTable.class) == null;
 
-            if (methodNames.contains(getterName)
+            if (notAnnotated && methodNames.contains(getterName)
                     && methodNames.contains(setterName)) {
                 TableColumn column = new TableColumn(camelCaseToTitleCase(fieldName));
                 column.setCellValueFactory(getCellFactory(model,
